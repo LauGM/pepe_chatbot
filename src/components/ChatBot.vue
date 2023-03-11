@@ -32,6 +32,7 @@ const EXAMPLES = [
     { text: 'como estas ? ', label: 'saludo' },
     { text: 'Buenas ', label: 'saludo' },
     { text: 'contame algo sobre lau ', label: 'creadora' },
+    { text: 'quien es Laura ? ', label: 'creadora' },
 ];
 
 const ANSWERS = {
