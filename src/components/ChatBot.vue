@@ -10,6 +10,7 @@ const mensajes = ref([
 ]);
 const EXAMPLES = [
     { text: 'Que es javascript ?', label: 'bases' },
+    { text: 'javascript', label: 'bases' },
     { text: 'Como puedo aprender a programar ?', label: 'hardware' },
     { text: 'Que necesito para empezar a programar ?', label: 'hardware' },
     { text: 'Cuantas horas tengo que dedicarle a la programacion ?', label: 'capacitacion' },
@@ -62,7 +63,8 @@ function evaluarFrase() {
         .then(response => response.json())
         .then(response => {
             console.log(response.classifications[0].prediction)
-            let respuesta = eval(`ANSWERS.${response.classifications[0].prediction}`);
+            /* let respuesta = eval(`ANSWERS.${response.classifications[0].prediction}`); */
+            let respuesta = ANSWERS[response.classifications[0].prediction];
             console.log(respuesta)
             mensajes.value.push({ id: Date.now(), tipo: 'bot', texto: respuesta });
             pregunta.value = '';
