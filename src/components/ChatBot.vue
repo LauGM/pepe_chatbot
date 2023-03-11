@@ -35,7 +35,7 @@ const EXAMPLES = [
     { text: 'quien es Laura ? ', label: 'creadora' },
 ];
 
-const ANSWERS = {
+/* const ANSWERS = {
     saludo: '👋 Hola, que te gustaria preguntarme? Se respuestas basicas sobre Javascript, programacion y sobre mi creadora',
     bases: 'JavaScript es un lenguaje de programación o de secuencias de comandos que te permite implementar funciones complejas en páginas web, cada vez que una página web hace algo más que sentarse allí y mostrar información estática para que la veas, muestra oportunas actualizaciones de contenido, mapas interactivos, animación de Gráficos 2D/3D, interactividad en general, etc., puedes apostar que probablemente JavaScript está involucrado. ✅',
     hardware: 'Esta pregunta es un poco relativa, ya que para empezar a programar casi cualquier computadora 💻 moderna cumple con las especificaciones mínimas para iniciar en este hermoso mundo. Pero si queremos dedicarnos de lleno y estar tranquilos, necesitamos tener la seguridad de saber qué tanto nos va a servir la herramienta que estamos utilizando.  Pc con Windows o Linux o Mac te vendrá bien, celulares y tablet no son recomendados',
@@ -43,6 +43,9 @@ const ANSWERS = {
     creadora: '👩‍💻 Lau es analista de sistemas y profe de programación desde hace más de 15 años.  Ella programó este chat y dicta curso de javascript y vue.js',
     otro: 'No estoy preparado para responder a eso 🤷🏻'
 }
+ */
+
+ const ANSWERS = JSON.parse(import.meta.env.VITE_ANSWERS);
 
 function evaluarFrase() {
     console.log('evaluando frase...')
@@ -64,7 +67,6 @@ function evaluarFrase() {
         .then(response => response.json())
         .then(response => {
             console.log(response.classifications[0].prediction)
-            /* let respuesta = eval(`ANSWERS.${response.classifications[0].prediction}`); */
             let respuesta = ANSWERS[response.classifications[0].prediction];
             console.log(respuesta)
             mensajes.value.push({ id: Date.now(), tipo: 'bot', texto: respuesta });
@@ -72,7 +74,6 @@ function evaluarFrase() {
             nextTick(() => {
                 let ventanaChat = document.getElementById('chat');
                 ventanaChat.scrollTop = ventanaChat.scrollHeight;
-                console.log(ventanaChat.scrollTop)
             });
         })
         .catch(err => console.error(err));
